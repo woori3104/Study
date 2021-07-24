@@ -24,8 +24,6 @@
             }
             this.coffeeBeans += beans;
         }
-
-
         makeCoffee(shots: number):CoffeeCup {
             if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
                 throw new Error("Not enough coffee beans!");
@@ -37,4 +35,29 @@
             };
         }
     }
+    let coffee = CoffeeMaker.makeMachine(1);
+    coffee.fillCoffeeBeans(22);
+    console.log(coffee.makeCoffee(3));
+
+    class User {
+        
+        get fullName():string {
+            return `${this.firstName} ${this.lastName}`;
+        }
+        private internalAge = 4;
+        get age(): number {
+            return this.internalAge;
+        }
+        set age(num: number) {
+            if (num < 0) {
+                throw new Error("value for age should be greater than 0");
+                
+            }
+            this.internalAge = num;
+        }
+        constructor (private firstName: string, public lastName : string) {}
+    }
+    const user = new User('woori','kim');
+    user.age = 6; 
+    console.log(user.fullName);
 }
