@@ -1,7 +1,7 @@
 
 type operation = 'add' | 'substract' | 'multiply' | 'remainder' | 'divide';
 
-function calculate(operation:operation, num1:number, num2:number):number|undefined {
+function calculate(operation:operation, num1:number, num2:number):number|Error {
     if (operation == 'add')
         return num1+num2;
     else if (operation == 'substract') 
@@ -11,8 +11,10 @@ function calculate(operation:operation, num1:number, num2:number):number|undefin
     else if (operation == 'divide') 
         return num1 / num2;
     else if (operation == 'remainder') 
-        return num1 / num2;
-    return undefined;
+        return num1 % num2;
+    return new Error(
+        'unkonown error'
+    );
 }
 
 
