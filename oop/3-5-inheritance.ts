@@ -1,7 +1,8 @@
 {
   type CoffeeCup = {
     shots: number;
-    hasMilk: boolean;
+    hasMilk?: boolean;
+    hasSugar?:boolean;
   };
 
   interface ICommercialCoffeeMaker {
@@ -76,7 +77,18 @@
     }
   }
 
+  class SweetCoffeeMaker extends CoffeeMaker {
+
+    makeCoffee(shots: number): CoffeeCup {
+        const coffee = super.makeCoffee(shots);
+      return {
+        ...coffee,
+        hasSugar:true,
+      };
+    }
+  }
+
   const machine = new CoffeeMaker(23);
-  const lattemachine = new CafelatteMaker(23, '12121');
+  const lattemachine = new CafelatteMaker(23, "12121");
   console.log(lattemachine.makeCoffee(1));
 }
