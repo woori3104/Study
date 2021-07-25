@@ -4,22 +4,18 @@
     hasMilk: boolean;
   };
 
-  interface ICoffeeMaker {
-    makeCoffee(shots: number): CoffeeCup;
-  }
-
   interface ICommercialCoffeeMaker {
     makeCoffee(shots: number): CoffeeCup;
     fillCoffeeBeans(beans: number): void;
     clean(): void;
   }
 
-  class CoffeeMaker implements ICoffeeMaker, ICommercialCoffeeMaker {
+  class CoffeeMaker implements ICommercialCoffeeMaker {
     private static BEANS_GRAMM_PER_SHOT: number = 7;
 
     private coffeeBeans: number = 0;
 
-    private constructor(coffeeBeans: number) {
+    public constructor(coffeeBeans: number) {
       this.coffeeBeans = coffeeBeans;
     }
 
@@ -63,36 +59,24 @@
       console.log("cleaning the meachine");
     }
   }
-  /*
-const maker: ICoffeeMaker = CoffeeMaker.makeMachine(32);
 
-const maker2:ICommercialCoffeeMaker = CoffeeMaker.makeMachine(32);
-maker2.fillCoffeeBeans(32);
-maker2.makeCoffee(2);
-maker2.clean();
-*/
-  class AmateurUser {
-    constructor(private machine: ICoffeeMaker) {}
-    makeCoffee() {
-      const coffee = this.machine.makeCoffee(2);
-      console.log(coffee);
+  class CafelatteMaker extends CoffeeMaker {
+    private steamMilk(): void {
+      console.log("Steaming some milk...");
+    }
+    constructor(beans: number, public readonly serialNumber: string) {
+      super(beans);
+    }
+    makeCoffee(shots: number): CoffeeCup {
+      this.steamMilk();
+      return {
+        shots,
+        hasMilk: true,
+      };
     }
   }
 
-  class proBarista {
-    constructor(private machine: ICommercialCoffeeMaker) {}
-    makeCoffee() {
-      const coffee = this.machine.makeCoffee(2);
-      console.log(coffee);
-      this.machine.fillCoffeeBeans(30);
-      this.machine.clean();
-    }
-  }
-
-  const maker: CoffeeMaker = CoffeeMaker.makeMachine(32);
-  const amateur = new AmateurUser(maker);
-  const pro = new proBarista(maker);
-
-  //amateur.makeCoffee();
-  pro.makeCoffee();
+  const machine = new CoffeeMaker(23);
+  const lattemachine = new CafelatteMaker(23, '12121');
+  console.log(lattemachine.makeCoffee(1));
 }
