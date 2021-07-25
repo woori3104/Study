@@ -14,6 +14,7 @@ function calculate(operation:operation, num1:number, num2:number):number|Error {
         return num1 % num2;
     return new Error(
         'unkonown error'
+        
     );
 }
 
