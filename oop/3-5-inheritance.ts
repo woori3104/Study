@@ -88,7 +88,30 @@
     }
   }
 
-  const machine = new CoffeeMaker(23);
-  const lattemachine = new CafelatteMaker(23, "12121");
-  console.log(lattemachine.makeCoffee(1));
+  class CheapMilkSteamer {
+    private streamMilk():void {
+        console.log('Steaming some milk...');
+    }
+    makeMilk(cup:CoffeeCup):CoffeeCup {
+        this.streamMilk();
+        return {
+            ...cup,
+            hasMilk: true,
+        };
+      }
+  }
+
+  class AutomaticSugaMixer {
+      private getSugar() {
+          console.log('Getting some sugar from candy');
+      }
+      addSugar(cup:CoffeeCup):CoffeeCup {
+        return {
+            ...cup, 
+            hasMilk:true,
+            hasSugar:true,
+        };
+      }
+  }
+
 }
