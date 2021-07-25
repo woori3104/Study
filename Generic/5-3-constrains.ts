@@ -31,6 +31,7 @@ const ellie = new FullTimeEmployee();
 const bob = new PartTimeEmployee();
 ellie.workFullTime();
 bob.workPartTime();
+
 console.log(ellie.workFullTime());
 console.log(bob.workPartTime());
 
